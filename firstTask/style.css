@@ -1,0 +1,134 @@
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+header{
+    color: rgb(4, 4, 4);
+    text-align: center;
+    padding: 1rem;
+    border-bottom: 3px solid rgb(255, 255, 255);
+    font-family: 'Kaushan Script', cursive;
+    background:linear-gradient(to right,rgb(226, 188, 218),#9654de);
+
+}
+
+.container{
+display: flex;
+
+}
+.sidebar{
+    background:linear-gradient(to right,rgb(230, 167, 233),#d9d7ff);
+    width: 180px;
+    height: 100vh;
+    padding-top: 1rem;
+    border-right: 3px solid #ffff;
+    font-family: 'Kaushan Script', cursive;
+}
+.sidebar ul{
+    padding: 0;
+    list-style: none;
+}
+.sidebar li{
+    padding: 2rem;
+    font-size: large;
+    
+}
+.sidebar a{
+    text-decoration: none;
+    color:rgb(36, 34, 34);
+    font-weight: bold;
+        text-shadow: 0 0 2px rgb(132, 127, 127);
+
+}
+.tab-link:hover{
+    color: rgb(166, 130, 181);
+
+}
+
+.tab-link.active{
+    color: rgb(211, 185, 222);
+    text-shadow: 0 0 4px rgb(0, 0, 0);
+}
+
+
+.main-content h3{
+font-family: 'Kaushan Script', cursive;
+
+}
+.main-content{
+    flex: 1;
+    background-color: #f4eff4;
+    padding: 2rem;
+    
+}
+
+form input,form textarea{
+    display: block;
+    padding: 0.4rem 0.7rem;
+    cursor:text;
+    border: none;
+    margin: 2rem 0;
+    width: 100%;
+    border: 1px solid #9d9a9e;
+    padding: 1rem .6rem;
+    box-shadow: 0 1px 3px #2f3347;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+}
+form textarea{
+    height: 100px;
+}
+button{
+    padding: 0.4rem 0.7rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background:linear-gradient(to right,rgb(125, 125, 140),#d48fc0);
+    color: #fff;
+    font-weight: bold;
+
+    padding: 0.8rem 1rem;
+    box-shadow: 0 1px 3px #2f3347;
+    border-radius: 15px;
+    cursor: pointer;
+}
+button:hover{
+ 
+        background:linear-gradient(to right,rgb(64, 64, 131),#ccc5ca);
+
+}
+.card-container{
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+}
+.card{
+    border: 2px solid #9d9a9e;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px #2f3347;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    transition: transform 0.6s ease, box-shadow 0.6 ease;
+    cursor: pointer;
+    background:linear-gradient(to right,rgb(204, 204, 240),#ccc5ca);
+
+}
+.card:hover {
+    transform: translatey(-4px);
+    box-shadow: 0 7px 14px #390f2e;
+    background:linear-gradient(to right,#94a7c3,#eacdee);
+}
+.card h3{
+    margin-top: 0;
+    color: #333;
+}
+.card p {
+    color : #2b2a2a;
+}
+
+.hidden{
+    display: none;
+}
+

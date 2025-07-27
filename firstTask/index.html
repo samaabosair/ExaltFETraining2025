@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Card Management Interface</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Italianno&family=Kaushan+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"></link>
+</head>
+<body>
+   <header>
+     <h1>Welcome</h1>
+   </header>
+   <div class="container"> 
+     <nav class="sidebar">
+        <ul>
+            <li><a href="#" id="new-card"  class="tab-link">New Card</a></li>
+            <li><a href="#" id="your-card" class="tab-link">Your Cards</a></li>
+        </ul>
+     </nav>
+
+     <main class="main-content">
+        <section id="section-new-card" class="show">
+            <form id="card-form">
+                <input type="text" id="title" placeholder="Card Title" required>
+                <textarea id="description" placeholder="Description" required></textarea>
+                <button id="save-btn" type="submit">Save</button>
+            </form>
+        </section>
+        <section id="section-your-card" class="show hidden">
+            <div id="cards-container" class="card-container"></div>
+        </section>
+       
+     </main>
+   </div>
+   <script src="script.js"></script>
+
+
+    
+</body>
+</html>
