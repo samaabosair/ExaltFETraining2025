@@ -114,26 +114,26 @@ body{
 }
 
 .top-block:hover {
- background: linear-gradient(to bottom, #d089de, #959ec9);
+ background: linear-gradient(to bottom,  #c762b2, #33a3ff);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   border-radius: 35px 35px 0px 0px  ;
 }
 
 .bottom-block:hover {
-  background: linear-gradient(to top, #d089de, #959ec9);
+  background: linear-gradient(to bottom,  #c762b2, #33a3ff);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   border-radius: 0 0 35px 35px  ;
 }
 
 .top-block.active {
-background: linear-gradient(to top, #d089de, #959ec9);
+background: linear-gradient(to top,  #c762b2, #33a3ff);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   border-radius: 35px 35px 0px 0px  ;
   border: solid 1px #ffffff;
 }
 
 .bottom-block.active {
-  background: linear-gradient(to top, #d089de, #959ec9);
+  background: linear-gradient(to top, #c762b2, #33a3ff);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   border-radius: 0 0 35px 35px  ;
   border: solid 1px #ffffff;

@@ -64,7 +64,7 @@ input[type="datetime-local"] {
 }
 
 .form-buttons button:hover {
-  background: linear-gradient(to right, #a770ef, #728cda);
+  background: linear-gradient(to right, #e8b2d0, #728cda);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
