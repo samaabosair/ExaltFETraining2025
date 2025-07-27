@@ -8,8 +8,10 @@ topBlock.addEventListener('click', () => {
 
 bottomBlock.addEventListener('click', () => {
   localStorage.setItem('activeTab', 'form');
+  localStorage.removeItem('editIndex'); 
   location.href = 'event.html';
 });
+
 window.addEventListener('DOMContentLoaded', () => {
   const activeTab = localStorage.getItem('activeTab');
   const topBlock = document.querySelector('.top-block');
