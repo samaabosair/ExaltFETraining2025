@@ -1,0 +1,70 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #fdfdfd;
+  padding: 2rem 2rem; /* padding */
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  min-height: 420px;  
+}
+
+label {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+input[type="text"],
+input[type="datetime-local"],
+textarea {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #728cda;
+  box-shadow: 0 0 0 3px rgba(114, 140, 218, 0.2);
+}
+
+input[type="datetime-local"] {
+  color: #333;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.form-buttons button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #728cda;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  font-weight: bold;
+
+}
+
+.form-buttons button:hover {
+  background: linear-gradient(to right, #a770ef, #728cda);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
