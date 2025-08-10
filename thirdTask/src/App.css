@@ -42,3 +42,9 @@
 .read-the-docs {
   color: #888;
 }
+@media (max-width: 600px) {
+  .event-card {
+    max-width: 90vw;
+    width: 100%;
+  }
+}

@@ -39,6 +39,8 @@ export default function EventCard({ event }) {
           lineHeight: "1.2em",
           maxHeight: "2.4em", // 2 lines height
           wordBreak: "break-word",
+          width: "100%",
+          maxWidth: "300px",
         }}
         title={event.title}
       >

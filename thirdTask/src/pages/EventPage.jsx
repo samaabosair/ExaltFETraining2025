@@ -11,7 +11,13 @@ export default function EventPage() {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px" 
+,
+       display: "flex",
+  flexWrap: "wrap",
+  gap: "20px",       // مسافة بين البطاقات
+  justifyContent: "center",
+    }}>
       <EventList events={events} />
     </div>
   );
