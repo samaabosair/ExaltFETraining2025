@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import CreatEvent from "./assets/pages/CreatEvent";
-import EventPage from "./assets/pages/EventPage";
+import Header from "./components/Header.jsx";
 import Sidebar from "./components/Sidebar";
-import './index.css';   
+import CreatEvent from "./pages/CreatEvent";
+import EventPage from "./pages/EventPage";
+import './index.css';
 function App() {
   return (
  <>    <Header />

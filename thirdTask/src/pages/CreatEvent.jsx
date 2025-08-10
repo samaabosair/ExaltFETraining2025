@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import EventForm from "../../components/EventForm";
-import { getEventById, addEvent, updateEvent } from "../../services/eventService";
+import EventForm from "../components/EventForm";
+import { getEventById, addEvent, updateEvent } from "../services/eventService";
 
 export default function CreatEvent() {
   const { id } = useParams();

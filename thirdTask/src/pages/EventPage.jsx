@@ -1,7 +1,7 @@
-import Header from '../../components/Header.jsx';
+import Header from "../components/Header.jsx";
+import EventList from "../components/EventList.jsx";
 import { useState, useEffect } from "react";
-import EventList from "../../components/EventList.jsx"
-import { getEvents } from "../../services/eventService";
+import { getEvents } from "../services/eventService";
 
 export default function EventPage() {
   const [events, setEvents] = useState([]);
