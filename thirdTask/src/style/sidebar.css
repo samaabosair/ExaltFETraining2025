@@ -8,7 +8,7 @@
   flex-shrink: 0;
   height: calc(100vh - 120px);
   position: sticky;
-  top: 80px;
+  top: 100px;
   overflow-y: auto;
   margin-left: 20px;  /* مسافة من اليسار */
   box-shadow: 0 8px 24px rgba(252, 184, 236, 0.1);
