@@ -1,0 +1,47 @@
+.sidebar {
+  width: 200px;
+  background-color: #1e1e2f;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 35px;
+  flex-shrink: 0;
+  height: calc(100vh - 120px);
+  position: sticky;
+  top: 80px;
+  overflow-y: auto;
+  margin-left: 20px;  /* مسافة من اليسار */
+  box-shadow: 0 8px 24px rgba(252, 184, 236, 0.1);
+  border: 1px solid #c38abb; /* هذه السطر يحدد البوردر بشكل كامل */
+}
+
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 15px;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.sidebar a:hover {
+  background-color: #ffffff;
+  color: rgb(152, 53, 99);
+}
+
+.active-link {
+  background-color: #b085ca;
+  color: #6d2193;
+  font-weight: 700;
+}
