@@ -10,9 +10,7 @@ export default function CreatEvent() {
 
 useEffect(() => {
   if (id) {
-    console.log("Loading event with id:", id);
     const ev = getEventById(id);
-    console.log("Found event:", ev);
     if (ev) setEventData(ev);
     else navigate("/");
   } else {

@@ -10,9 +10,9 @@
   position: sticky;
   top: 100px;
   overflow-y: auto;
-  margin-left: 20px;  /* مسافة من اليسار */
+  margin-left: 20px;  
   box-shadow: 0 8px 24px rgba(252, 184, 236, 0.1);
-  border: 1px solid #c38abb; /* هذه السطر يحدد البوردر بشكل كامل */
+  border: 1px solid #c38abb;
 }
 
 
