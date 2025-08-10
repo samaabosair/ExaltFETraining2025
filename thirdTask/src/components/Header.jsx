@@ -6,7 +6,7 @@ export default function Header() {
 
   return (
     <header className="header">
-      {location.pathname === '/creatEvent' ? (
+      {location.pathname === '/create' ? (
         <h2 className="page-title">Create / Edit Event</h2>
       ) : (
         <>

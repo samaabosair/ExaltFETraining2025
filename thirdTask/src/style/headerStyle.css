@@ -4,7 +4,7 @@
   padding: 15px 30px;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* يفصل بين العنصرين */
+  justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
   position: fixed;
@@ -28,5 +28,9 @@
 .left-link:hover,
 .right-link:hover {
   color: rgb(155, 113, 151);
+}
+.page-title{
+    margin: 0; 
+
 }
 
