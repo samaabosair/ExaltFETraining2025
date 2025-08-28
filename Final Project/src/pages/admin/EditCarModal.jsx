@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { Modal, Button, Form, Alert } from "react-bootstrap";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../services/firebase";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateCar } from "../../services/carService";
 import {
   modalHeaderStyle,
   modalBodyStyle,
@@ -11,66 +10,54 @@ import {
   submitButtonStyle,
 } from "./AddCarModal.styles";
 
-function AddCarModal({ show, handleClose }) {
-  const [brand, setBrand] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [imageUrls, setImageUrls] = useState([""]);
+function EditCarModal({ show, handleClose, car }) {
+  const [brand, setBrand] = useState(car.brand || "");
+  const [price, setPrice] = useState(car.price || "");
+  const [description, setDescription] = useState(car.description || "");
+  const [imageUrls, setImageUrls] = useState(car.images || [""]);
+  const [status, setStatus] = useState(car.status || "available");
   const [error, setError] = useState("");
 
   const queryClient = useQueryClient();
 
-  const addCarMutation = useMutation({
-    mutationFn: async (newCar) => addDoc(collection(db, "cars"), newCar),
+  const updateCarMutation = useMutation({
+    mutationFn: (updatedCar) => updateCar(car.id, updatedCar),
     onSuccess: () => {
       queryClient.invalidateQueries(["cars"]);
       handleClose();
-      resetForm();
     },
-    onError: () => setError("Failed to add car."),
+    onError: () => setError("Failed to update car."),
   });
 
-  const resetForm = () => {
-    setBrand("");
-    setPrice("");
-    setDescription("");
-    setImageUrls([""]);
-    setError("");
-  };
-
-  const handleAddCar = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
+    setError("");
+
     const nonEmptyUrls = imageUrls.filter((url) => url.trim() !== "");
     if (nonEmptyUrls.length === 0) {
       setError("Please provide at least one image URL.");
       return;
     }
-    addCarMutation.mutate({
+
+    updateCarMutation.mutate({
       brand,
       price: Number(price),
       description,
       images: nonEmptyUrls,
-      status: "available",
+      status, // تحديث الحالة
     });
   };
-
-  const handleImageChange = (index, value) => {
-    const urls = [...imageUrls];
-    urls[index] = value;
-    setImageUrls(urls);
-  };
-
-  const addImageField = () => setImageUrls([...imageUrls, ""]);
 
   return (
     <Modal show={show} onHide={handleClose} size="lg">
       <Modal.Header closeButton style={modalHeaderStyle}>
-        <Modal.Title>Add New Car</Modal.Title>
+        <Modal.Title>Edit Car</Modal.Title>
       </Modal.Header>
+
       <Modal.Body style={modalBodyStyle}>
         {error && <Alert variant="danger">{error}</Alert>}
 
-        <Form onSubmit={handleAddCar}>
+        <Form onSubmit={handleUpdate}>
           <Form.Group className="mb-3">
             <Form.Label>Car Name</Form.Label>
             <Form.Control
@@ -92,39 +79,57 @@ function AddCarModal({ show, handleClose }) {
               required
             />
           </Form.Group>
+
+          {/* اختيار الحالة */}
+          <Form.Group className="mb-3">
+            <Form.Label>Status</Form.Label>
+            <Form.Select
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              style={formControlStyle}
+            >
+              <option value="available">Available</option>
+              <option value="unavailable">Unavailable</option>
+            </Form.Select>
+          </Form.Group>
+
+          {/* صور السيارة */}
           <Form.Label>Image URLs</Form.Label>
-            {imageUrls.map((url, idx) => (
-              <Form.Group className="mb-2 d-flex" key={idx}>
+          {imageUrls.map((url, idx) => (
+            <Form.Group className="mb-2 d-flex" key={idx}>
               <Form.Control
                 type="text"
                 value={url}
-                onChange={(e) => handleImageChange(idx, e.target.value)}
+                onChange={(e) => {
+                  const urls = [...imageUrls];
+                  urls[idx] = e.target.value;
+                  setImageUrls(urls);
+                }}
                 placeholder="Enter image URL"
-               style={formControlStyle}
+                style={formControlStyle}
                 required
-                 />
-              {imageUrls.length > 1 && ( 
-                 <Button
-                 variant="danger"
+              />
+              <Button
+                variant="danger"
                 className="ms-2"
                 onClick={() =>
-                setImageUrls(imageUrls.filter((_, i) => i !== idx))
-                }  > Remove
-                </Button> )}
-                </Form.Group>
-                ))}
+                  setImageUrls(imageUrls.filter((_, i) => i !== idx))
+                }
+              >
+                Remove
+              </Button>
+            </Form.Group>
+          ))}
 
           <Button
-          variant="secondary"
-          size="sm"
-          onClick={addImageField}
-          className="mb-3"
-          style={addButtonStyle}
+            variant="secondary"
+            size="sm"
+            className="mb-3"
+            style={addButtonStyle}
+            onClick={() => setImageUrls([...imageUrls, ""])}
           >
-          + Add another image
-                        </Button>
-
-
+            + Add another image
+          </Button>
 
           <Form.Group className="mb-3">
             <Form.Label>Description</Form.Label>
@@ -142,9 +147,9 @@ function AddCarModal({ show, handleClose }) {
             type="submit"
             className="w-100"
             style={submitButtonStyle}
-            disabled={addCarMutation.isLoading}
+            disabled={updateCarMutation.isLoading}
           >
-            {addCarMutation.isLoading ? "Adding..." : "Add Car"}
+            {updateCarMutation.isLoading ? "Updating..." : "Update Car"}
           </Button>
         </Form>
       </Modal.Body>
@@ -152,4 +157,4 @@ function AddCarModal({ show, handleClose }) {
   );
 }
 
-export default AddCarModal;
+export default EditCarModal;

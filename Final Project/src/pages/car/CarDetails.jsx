@@ -1,50 +1,42 @@
-// src/pages/car/CarDetails.jsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getCars, deleteCar } from "../../services/carService";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Image,
-  Button,
-  Carousel,
-} from "react-bootstrap";
+import { Container, Row, Col, Card, Image, Button, Carousel } from "react-bootstrap";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 import { auth } from "../../services/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-
+import { pageStyle, carouselImageStyle, cardStyle, descriptionStyle } from "./CarDetails.styles";
+import EditCarModal from "../admin/EditCarModal";
+import RentalModal from "../rentals/RentalModal";
 function CarDetails() {
   const { id } = useParams();
   const queryClient = useQueryClient();
-  const [isAdmin, setIsAdmin] = React.useState(false);
 
-  // جلب السيارات
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showRentalModal, setShowRentalModal] = useState(false); // حالة المودال
+
   const { data: cars = [], isLoading } = useQuery({
     queryKey: ["cars"],
     queryFn: getCars,
   });
 
-  // Mutation للحذف
   const deleteMutation = useMutation({
     mutationFn: deleteCar,
     onSuccess: () => {
       queryClient.invalidateQueries(["cars"]);
-      window.location.href = "/main"; // رجوع بعد الحذف
+      window.location.href = "/main";
     },
   });
 
   const car = cars.find((c) => c.id === id);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // غير الـ UID ده حسب الأدمن عندك
-        setIsAdmin(user.uid === "349XyZqFF9QAwwrkwT52iVQibHk2");
+        setIsAdmin(user.uid === "349XyZqFF9QAwwrkwT52iVQibHk2"); // مثال UID المسؤول
       }
     });
     return () => unsub();
@@ -54,21 +46,12 @@ function CarDetails() {
   if (!car) return <p>Car not found.</p>;
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#242424",
-        color: "#fff",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <div style={pageStyle}>
       <Header />
 
       <Container fluid className="mt-4 flex-grow-1">
         <Row className="justify-content-center">
           <Col md={8}>
-            {/* Carousel */}
             {car.images && car.images.length > 0 && (
               <Carousel variant="dark" className="mb-4">
                 {car.images.map((img, index) => (
@@ -78,38 +61,22 @@ function CarDetails() {
                       alt={`${car.brand} ${index + 1}`}
                       fluid
                       rounded
-                      style={{
-                        width: "100%",
-                        height: "400px",
-                        objectFit: "cover",
-                      }}
+                      style={carouselImageStyle}
                     />
                   </Carousel.Item>
                 ))}
               </Carousel>
             )}
 
-            {/* Card تحت الصور */}
-            <Card
-              className="p-4"
-              style={{
-                background: "linear-gradient(145deg, #1e1e1e, #2a2a2a)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                borderRadius: "12px",
-                color: "#fff",
-              }}
-            >
+            <Card style={cardStyle}>
               <h2>{car.brand}</h2>
-              <p>{car.description}</p>
+              <p style={descriptionStyle}>{car.description}</p>
               <h4>${car.price}/day</h4>
               <p>Status: {car.status}</p>
 
-              {/* أزرار حسب نوع المستخدم */}
               {isAdmin ? (
                 <div>
-                  <Button variant="warning" className="me-2">
-                    Edit
-                  </Button>
+                  <Button variant="warning" className="me-2" onClick={() => setShowEditModal(true)}>Edit</Button>
                   <Button
                     variant="danger"
                     onClick={() => deleteMutation.mutate(car.id)}
@@ -119,11 +86,36 @@ function CarDetails() {
                   </Button>
                 </div>
               ) : (
-                <Button variant="primary">Rent Now</Button>
+                <Button
+                  variant="warning"
+                  disabled={car.status === "unavailable"}
+                  style={{
+                    cursor: car.status === "unavailable" ? "not-allowed" : "pointer",
+                    opacity: car.status === "unavailable" ? 0.5 : 1,
+                    transition: "all 0.3s ease",
+                  }}
+                  onClick={() => setShowRentalModal(true)} // فتح المودال عند الضغط
+                >
+                  {car.status === "unavailable" ? "Not Available" : "Rent Now"}
+                </Button>
               )}
             </Card>
           </Col>
         </Row>
+
+        {/* مودال تعديل السيارة */}
+        <EditCarModal
+          show={showEditModal}
+          handleClose={() => setShowEditModal(false)}
+          car={car}
+        />
+
+        {/* مودال الإيجار */}
+        <RentalModal
+          show={showRentalModal}
+          handleClose={() => setShowRentalModal(false)}
+          car={car}
+        />
       </Container>
 
       <Footer />
