@@ -13,7 +13,7 @@ function AddCarModal({ show, handleClose }) {
   
   const queryClient = useQueryClient();
 
-  // ✅ Mutation لإضافة السيارة
+  //  Mutation لإضافة السيارة
   const addCarMutation = useMutation({
     mutationFn: async (newCar) => {
       return await addDoc(collection(db, "cars"), newCar);
@@ -41,7 +41,6 @@ function AddCarModal({ show, handleClose }) {
     e.preventDefault();
     setError("");
 
-    // تحقق من أن هناك رابط واحد على الأقل
     const nonEmptyUrls = imageUrls.filter((url) => url.trim() !== "");
     if (nonEmptyUrls.length === 0) {
       setError("Please provide at least one image URL.");
