@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../services/firebase"; // use the auth instance from firebase.js
+import { auth } from "../../services/firebase";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button, Alert, Card } from "react-bootstrap";
-import Header from "../../components/header";
+import {
+  containerStyle,
+  cardStyle,
+  inputStyle,
+  submitButtonStyle,
+} from "./Login.styles";
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,13 +24,7 @@ function Login() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
-      if (user.email === "admin@admin.com") {
-        navigate("/main"); // redirect to admin home
-      } else {
-        navigate("/main"); // redirect to normal user home
-      }
-
+      navigate("/main"); // redirect for both admin and normal user
     } catch (err) {
       setError("Login failed. Please check your email and password.");
       console.error(err);
@@ -32,11 +32,10 @@ function Login() {
   };
 
   return (
-    <>
-    <Container className="d-flex justify-content-center align-items-center vh-100">
+    <Container style={containerStyle}>
       <Row className="w-100">
         <Col md={{ span: 6, offset: 3 }}>
-          <Card className="p-4 shadow">
+          <Card style={cardStyle}>
             <h2 className="mb-4 text-center">Login</h2>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleLogin}>
@@ -48,6 +47,7 @@ function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  style={inputStyle}
                 />
               </Form.Group>
 
@@ -59,10 +59,11 @@ function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  style={inputStyle}
                 />
               </Form.Group>
 
-              <Button variant="primary" type="submit" className="w-100">
+              <Button type="submit" className="w-100" style={submitButtonStyle}>
                 Login
               </Button>
             </Form>
@@ -70,7 +71,6 @@ function Login() {
         </Col>
       </Row>
     </Container>
-    </>
   );
 }
 
