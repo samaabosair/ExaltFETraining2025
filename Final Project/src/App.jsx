@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/main" element={<MainPage />} />
-        <Route path="/car/:id" element={<CarDetails />} /> {/* صفحة تفاصيل السيارة */}
+        <Route path="/car/:id" element={<CarDetails />} /> 
      
       </Routes>
     </Router>

@@ -10,13 +10,14 @@ import { onAuthStateChanged } from "firebase/auth";
 import { pageStyle, carouselImageStyle, cardStyle, descriptionStyle } from "./CarDetails.styles";
 import EditCarModal from "../admin/EditCarModal";
 import RentalModal from "../rentals/RentalModal";
+
 function CarDetails() {
   const { id } = useParams();
   const queryClient = useQueryClient();
 
   const [isAdmin, setIsAdmin] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [showRentalModal, setShowRentalModal] = useState(false); // حالة المودال
+  const [showRentalModal, setShowRentalModal] = useState(false);
 
   const { data: cars = [], isLoading } = useQuery({
     queryKey: ["cars"],
@@ -35,15 +36,20 @@ function CarDetails() {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsAdmin(user.uid === "349XyZqFF9QAwwrkwT52iVQibHk2"); // مثال UID المسؤول
-      }
+      if (user) setIsAdmin(user.uid === "349XyZqFF9QAwwrkwT52iVQibHk2");
     });
     return () => unsub();
   }, []);
 
   if (isLoading) return <p>Loading...</p>;
   if (!car) return <p>Car not found.</p>;
+
+  const today = new Date().getTime();
+  const isUnavailableToday = car.status === "unavailable" ||
+    car.rentals?.some(r => {
+      const [start, end] = r.period.split(" - ").map(Number);
+      return today >= start && today <= end;
+    });
 
   return (
     <div style={pageStyle}>
@@ -72,7 +78,7 @@ function CarDetails() {
               <h2>{car.brand}</h2>
               <p style={descriptionStyle}>{car.description}</p>
               <h4>${car.price}/day</h4>
-              <p>Status: {car.status}</p>
+              <p>Status: {isUnavailableToday ? "Not Available" : "Available"}</p>
 
               {isAdmin ? (
                 <div>
@@ -88,29 +94,27 @@ function CarDetails() {
               ) : (
                 <Button
                   variant="warning"
-                  disabled={car.status === "unavailable"}
+                  disabled={isUnavailableToday}
                   style={{
-                    cursor: car.status === "unavailable" ? "not-allowed" : "pointer",
-                    opacity: car.status === "unavailable" ? 0.5 : 1,
+                    cursor: isUnavailableToday ? "not-allowed" : "pointer",
+                    opacity: isUnavailableToday ? 0.5 : 1,
                     transition: "all 0.3s ease",
                   }}
-                  onClick={() => setShowRentalModal(true)} // فتح المودال عند الضغط
+                  onClick={() => setShowRentalModal(true)}
                 >
-                  {car.status === "unavailable" ? "Not Available" : "Rent Now"}
+                  {isUnavailableToday ? "Not Available" : "Rent Now"}
                 </Button>
               )}
             </Card>
           </Col>
         </Row>
 
-        {/* مودال تعديل السيارة */}
         <EditCarModal
           show={showEditModal}
           handleClose={() => setShowEditModal(false)}
           car={car}
         />
 
-        {/* مودال الإيجار */}
         <RentalModal
           show={showRentalModal}
           handleClose={() => setShowRentalModal(false)}

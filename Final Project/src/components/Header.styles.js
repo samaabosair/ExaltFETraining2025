@@ -10,7 +10,7 @@ export const navbarStyle = {
 export const brandStyle = {
   display: "flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "5px",
 };
 
 export const brandTextStyle = {

@@ -1,88 +1,122 @@
-// src/pages/MainPage.jsx
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Button, Table, ListGroup, Image } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
 import { onAuthStateChanged } from "firebase/auth";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+
 import { auth } from "../../services/firebase";
 import { getCars, deleteCar } from "../../services/carService";
+
 import Header from "../../components/header";
 import Footer from "../../components/footer";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Sidebar from "../../components/Sidebar";
 import CarsList from "../car/CarsList";
 import HistoryTable from "../car/HistoryTable";
+import AddCarModal from "../admin/AddCarModal";
+
+import { carsSectionStyle, carsHeaderStyle, addCarButtonStyle } from "./MainPage.styles";
 
 function MainPage() {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [activeTab, setActiveTab] = useState("cars"); // "cars" or "history"
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("cars");
+  const [loadingUser, setLoadingUser] = useState(true);
+  const [showModalAddCar, setShowModalAddCar] = useState(false);
 
-  const { data: cars = [], isLoading, isError } = useQuery({
+  const queryClient = useQueryClient();
+
+  const { data: cars = [], isLoading: isLoadingCars, isError: isCarsError } = useQuery({
     queryKey: ["cars"],
     queryFn: getCars,
   });
 
   const deleteMutation = useMutation({
     mutationFn: deleteCar,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["cars"]);
-    },
+    onSuccess: () => queryClient.invalidateQueries(["cars"]),
   });
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setIsAdmin(user.uid === "349XyZqFF9QAwwrkwT52iVQibHk2");
+        setIsAdmin(
+          user.uid === "349XyZqFF9QAwwrkwT52iVQibHk2" || user.email === "admin@admin.com"
+        );
+      } else {
+        setIsAdmin(false);
       }
+      setLoadingUser(false);
     });
-    return () => unsubscribe();
+    return () => unsub();
   }, []);
 
   return (
-  <div
-    style={{
-      minHeight: "100vh",
-      backgroundColor: "#242424",
-      color: "#fff",
-      display: "flex",
-      flexDirection: "column",
-    }}
-  >
-    <Header />
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "#242424",
+        color: "#fff",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Header />
 
-    {/* Main content should grow and push footer down */}
-    <Container fluid className="mt-4 flex-grow-1">
-     <Row>
-  {/* Sidebar */}
-  <Col md={2}>
-    <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-  </Col>
+      <Container fluid className="mt-4 flex-grow-1">
+        <Row>
+          {/* Sidebar only for normal users */}
+          {!isAdmin && (
+            <Col md={2}>
+              <Sidebar
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                isAdmin={isAdmin}
+                loadingUser={loadingUser}
+              />
+            </Col>
+          )}
 
-  {/* Main Content */}
-  <Col md={10}>
-    {activeTab === "cars" && (
-      <>
-        {isLoading && <p>Loading cars...</p>}
-        {isError && <p style={{ color: "red" }}>Failed to load cars.</p>}
+          <Col md={isAdmin ? 12 : 10}>
+            {(isAdmin || activeTab === "cars") && (
+              <div style={carsSectionStyle}>
+                {/* Header for Cars List */}
+                <div style={carsHeaderStyle}>
+                  <h4 style={{ margin: 0 }}>Cars List</h4>
 
-        <CarsList cars={cars} isAdmin={isAdmin} deleteMutation={deleteMutation} />
-      </>
-    )}
+                  {isAdmin && (
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      {/* Add Car button */}
+                      <button
+                        style={addCarButtonStyle}
+                        onClick={() => setShowModalAddCar(true)}
+                      >
+                        +
+                      </button>
 
-    {activeTab === "history" && (
-      <HistoryTable history={[{ car: "Toyota Corolla", user: "John Doe", rentDate: "2025-08-20", returnDate: "2025-08-25", status: "Returned" }]} />
-    )}
-  </Col>
-</Row>
+                    </div>
+                  )}
+                </div>
 
-    </Container>
+                {/* Cars list */}
+                {isLoadingCars && <p>Loading cars...</p>}
+                {isCarsError && <p style={{ color: "red" }}>Failed to load cars.</p>}
+                {!isLoadingCars && !isCarsError && (
+                  <CarsList cars={cars} isAdmin={isAdmin} deleteMutation={deleteMutation} />
+                )}
 
-    {/* Footer stays at bottom */}
-    <Footer />
-  </div>
-);
+                {/* Add Car modal */}
+                <AddCarModal
+                  show={showModalAddCar}
+                  handleClose={() => setShowModalAddCar(false)}
+                />
+              </div>
+            )}
 
+            {!isAdmin && activeTab === "history" && <HistoryTable />}
+          </Col>
+        </Row>
+      </Container>
+
+      <Footer />
+    </div>
+  );
 }
 
 export default MainPage;

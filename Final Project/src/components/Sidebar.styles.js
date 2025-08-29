@@ -2,7 +2,7 @@
 export const listGroupStyle = {
   background: "linear-gradient(180deg, #1e1e1e, #2a2a2a)",
   borderRadius: "12px",
-  padding: "10px 0",
+  padding: "15px 10px",
   minHeight: "100vh",
   color: "#fff",
 };
@@ -14,8 +14,8 @@ export const itemStyle = (isActive) => ({
   fontWeight: isActive ? "bold" : "normal",
   border: "none",
   padding: "12px 20px",
-  margin: "4px 8px",
-  borderRadius: "8px",
+  margin: "4px 1px",
+  borderRadius: "20px",
   transition: "all 0.3s ease",
 });
 
