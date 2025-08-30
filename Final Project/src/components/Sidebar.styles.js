@@ -1,4 +1,3 @@
-// src/components/Sidebar.styles.js
 export const listGroupStyle = {
   background: "linear-gradient(180deg, #1e1e1e, #2a2a2a)",
   borderRadius: "12px",

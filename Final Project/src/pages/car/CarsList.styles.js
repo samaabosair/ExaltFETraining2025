@@ -1,4 +1,3 @@
-// src/pages/car/CarsList.styles.js
 
 export const cardStyle = (isUnavailable, isHovered) => ({
   opacity: isUnavailable ? 0.5 : 1,

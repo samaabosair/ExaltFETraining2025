@@ -47,8 +47,8 @@ describe("Admin Flow", () => {
     });
 
     cy.contains("Edited Car").should("exist");
-    cy.contains("unavailable").should("exist");
-          cy.wait(1000);
+    cy.contains("Not Available").should("exist");
+    cy.wait(1000);
   });
 
   it("should delete a car", () => {

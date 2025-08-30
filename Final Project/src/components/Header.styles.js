@@ -1,5 +1,3 @@
-// src/components/Header.styles.js
-
 export const navbarStyle = {
   backgroundColor: "black",
   boxShadow: "0 1px 5px rgba(0,0,0,0.2)",

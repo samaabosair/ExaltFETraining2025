@@ -1,4 +1,3 @@
-// src/components/Footer.styles.js
 export const footerStyle = {
   background: "linear-gradient(145deg, #1e1e1e, #2a2a2a)",
   borderTop: "1px solid rgba(255,255,255,0.1)",

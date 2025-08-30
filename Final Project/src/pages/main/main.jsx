@@ -61,7 +61,6 @@ function MainPage() {
 
       <Container fluid className="mt-4 flex-grow-1">
         <Row>
-          {/* Sidebar only for normal users */}
           {!isAdmin && (
             <Col md={2}>
               <Sidebar
@@ -76,13 +75,11 @@ function MainPage() {
           <Col md={isAdmin ? 12 : 10}>
             {(isAdmin || activeTab === "cars") && (
               <div style={carsSectionStyle}>
-                {/* Header for Cars List */}
                 <div style={carsHeaderStyle}>
                   <h4 style={{ margin: 0 }}>Cars List</h4>
 
                   {isAdmin && (
                     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                      {/* Add Car button */}
                       <button
                         style={addCarButtonStyle}
                         onClick={() => setShowModalAddCar(true)}
@@ -94,14 +91,12 @@ function MainPage() {
                   )}
                 </div>
 
-                {/* Cars list */}
                 {isLoadingCars && <p>Loading cars...</p>}
                 {isCarsError && <p style={{ color: "red" }}>Failed to load cars.</p>}
                 {!isLoadingCars && !isCarsError && (
                   <CarsList cars={cars} isAdmin={isAdmin} deleteMutation={deleteMutation} />
                 )}
 
-                {/* Add Car modal */}
                 <AddCarModal
                   show={showModalAddCar}
                   handleClose={() => setShowModalAddCar(false)}

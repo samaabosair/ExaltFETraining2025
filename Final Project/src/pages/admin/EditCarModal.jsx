@@ -44,7 +44,7 @@ function EditCarModal({ show, handleClose, car }) {
       price: Number(price),
       description,
       images: nonEmptyUrls,
-      status, // تحديث الحالة
+      status, 
     });
   };
 
@@ -80,7 +80,6 @@ function EditCarModal({ show, handleClose, car }) {
             />
           </Form.Group>
 
-          {/* اختيار الحالة */}
           <Form.Group className="mb-3">
             <Form.Label>Status</Form.Label>
             <Form.Select
@@ -93,7 +92,6 @@ function EditCarModal({ show, handleClose, car }) {
             </Form.Select>
           </Form.Group>
 
-          {/* صور السيارة */}
           <Form.Label>Image URLs</Form.Label>
           {imageUrls.map((url, idx) => (
             <Form.Group className="mb-2 d-flex" key={idx}>

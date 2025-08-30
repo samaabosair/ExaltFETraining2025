@@ -2,15 +2,39 @@ import { db, storage } from "./firebase";
 import { 
   collection, getDocs, doc, deleteDoc, addDoc, updateDoc, where, query, getDoc 
 } from "firebase/firestore";
-
-// جلب كل السيارات
 export const getCars = async () => {
-  const carsCollection = collection(db, "cars");
-  const carsSnapshot = await getDocs(carsCollection);
-  return carsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-};
+  try {
+    const carsCollection = collection(db, "cars");
+    const carsSnapshot = await getDocs(carsCollection);
 
-// إضافة سيارة جديدة
+    const cars = await Promise.all(
+      carsSnapshot.docs.map(async (docSnap) => {
+        const carData = { id: docSnap.id, ...docSnap.data() };
+
+        const rentalsRef = collection(db, "rentals");
+        const q = query(rentalsRef, where("carId", "==", docSnap.id));
+        const rentalsSnapshot = await getDocs(q);
+
+        carData.rentals = rentalsSnapshot.docs.map(r => {
+          const rental = r.data();
+          if (!rental.period) {
+            console.warn("⚠️ Rental بدون period:", rental);
+            return { period: "" };
+          }
+
+          return rental;
+        });
+
+        return carData;
+      })
+    );
+
+    return cars;
+  } catch (err) {
+    console.error("Error in getCars:", err);
+    throw new Error("Failed to load cars."); 
+  }
+};
 export const addCarWithImages = async (carData, imageUrls = []) => {
   if (!imageUrls.length) throw new Error("No image URLs provided");
 
@@ -26,18 +50,15 @@ export const addCarWithImages = async (carData, imageUrls = []) => {
   }
 };
 
-// حذف سيارة
 export const deleteCar = async (carId) => {
   await deleteDoc(doc(db, "cars", carId));
 };
 
-// تحديث سيارة
 export const updateCar = async (id, updatedCar) => {
   const carRef = doc(db, "cars", id);
   await updateDoc(carRef, updatedCar);
 };
 
-// جلب إيجارات المستخدم العادي
 export const getUserRentals = async (userId) => {
   if (!userId) return [];
 
@@ -61,7 +82,6 @@ export const getUserRentals = async (userId) => {
   return rentals;
 };
 
-// جلب كل الإيجارات للـ admin
 export const getAllRentals = async () => {
   const rentalsRef = collection(db, "rentals");
   const snapshot = await getDocs(rentalsRef);
@@ -87,7 +107,6 @@ export const getAllRentals = async () => {
   return rentals;
 };
 
-// إضافة إيجار جديد
 export const addRental = async (rentalData) => {
   try {
     await addDoc(collection(db, "rentals"), rentalData);
@@ -97,13 +116,3 @@ export const addRental = async (rentalData) => {
   }
 };
 
-// حذف إيجار
-export const deleteRental = async (rentalId) => {
-  await deleteDoc(doc(db, "rentals", rentalId));
-};
-
-// تحديث إيجار
-export const updateRental = async (rentalId, updatedRental) => {
-  const rentalRef = doc(db, "rentals", rentalId);
-  await updateDoc(rentalRef, updatedRental);
-};

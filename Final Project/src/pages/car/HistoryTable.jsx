@@ -1,4 +1,3 @@
-// src/pages/history/HistoryTable.jsx
 import React, { useEffect, useState } from "react";
 import { Card, Table } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query";
@@ -17,12 +16,11 @@ function HistoryTable() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [cars, setCars] = useState([]);
 
-  // التحقق من المستخدم
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserId(user.uid);
-        setIsAdmin(user.email === "admin@admin.com"); // تحديد الادمن حسب الايميل
+        setIsAdmin(user.email === "admin@admin.com"); 
       } else {
         setUserId(null);
         setIsAdmin(false);
@@ -31,16 +29,14 @@ function HistoryTable() {
     return () => unsub();
   }, []);
 
-  // جلب بيانات السيارات
   useEffect(() => {
     getCars().then(setCars).catch(console.error);
   }, []);
 
-  // جلب البيانات حسب الدور
   const { data: history = [], isLoading, isError, error } = useQuery({
     queryKey: ["rentals", userId],
     queryFn: () => {
-      if (isAdmin) return getAllRentals(); // سيتم تجاهلها لاحقًا
+      if (isAdmin) return getAllRentals(); 
       return getUserRentals(userId);
     },
     enabled: !!userId,
@@ -53,7 +49,6 @@ function HistoryTable() {
 
   if (!userId) return <p>Please login to see your history.</p>;
 
-  // لا نعرض التاريخ للادمن
   if (isAdmin) return null;
 
   if (isLoading) return <p>Loading rental history...</p>;

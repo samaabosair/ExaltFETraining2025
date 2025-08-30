@@ -63,8 +63,8 @@ const RentalModal = ({ show, handleClose, car }) => {
     onSuccess: () => {
       queryClient.invalidateQueries(["rentals"]);
       queryClient.invalidateQueries(["cars"]);
-      handleClose(); // إغلاق المودال
-      window.location.href = "/main"; // العودة للصفحة الرئيسية بعد الحجز
+      handleClose(); 
+      window.location.href = "/main"; 
     },
     onError: (error) => {
       alert(error.message || "Failed to rent the car. Please try again.");

@@ -9,7 +9,7 @@ function CarsList({ cars = [], isAdmin }) {
 
   if (!cars || cars.length === 0) return <p>No cars available.</p>;
 
-  const today = new Date().getTime();
+  const now = new Date().getTime();
 
   return (
     <Row xs={1} md={3} className="g-4">
@@ -18,29 +18,34 @@ function CarsList({ cars = [], isAdmin }) {
 
         const isHovered = hoveredCard === car.id;
 
-        const isUnavailable = !isAdmin && (
-          car.status === "unavailable" ||
-          car.rentals?.some(r => {
-            const [start, end] = r.period.split(" - ").map(Number);
-            return today >= start && today <= end;
-          })
-        );
+const isUnavailable = !isAdmin && (
+  car.status === "unavailable" ||
+  (car.rentals && car.rentals.length > 0 && car.rentals.some(r => {
+    const [startStr, endStr] = r.period.split(" - ");
+    const start = Number(startStr);
+    const end = Number(endStr);
+    return now >= start && now <= (end - 1);
+  }))
+);
+
+
 
         const cardContent = (
-          <Card
-            className="h-100"
-            style={{
-              ...cardStyle(isUnavailable, isHovered),
-              cursor: isUnavailable && !isAdmin ? "not-allowed" : "pointer",
-              opacity: isUnavailable && !isAdmin ? 0.5 : 1,
-              transition: "all 0.3s ease",
-            }}
-            onClick={() => {
-              if (!isUnavailable || isAdmin) navigate(`/car/${car.id}`);
-            }}
-            onMouseEnter={() => setHoveredCard(car.id)}
-            onMouseLeave={() => setHoveredCard(null)}
-          >
+     <Card
+  className="h-100"
+  data-status={isUnavailable ? "unavailable" : "available"}  
+  style={{
+    ...cardStyle(isUnavailable, isHovered),
+    cursor: isUnavailable && !isAdmin ? "not-allowed" : "pointer",
+    opacity: isUnavailable && !isAdmin ? 0.5 : 1,
+    transition: "all 0.3s ease",
+  }}
+  onClick={() => {
+    if (!isUnavailable || isAdmin) navigate(`/car/${car.id}`);
+  }}
+  onMouseEnter={() => setHoveredCard(car.id)}
+  onMouseLeave={() => setHoveredCard(null)}
+>
             {car.images?.[0] && (
               <Card.Img
                 variant="top"

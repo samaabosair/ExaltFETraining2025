@@ -1,4 +1,3 @@
-// src/pages/admin/AddCarModal.styles.js
 
 export const modalHeaderStyle = {
   background: "linear-gradient(180deg, #1e1e1e, #2a2a2a)",

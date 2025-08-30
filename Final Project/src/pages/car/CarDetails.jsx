@@ -44,11 +44,14 @@ function CarDetails() {
   if (isLoading) return <p>Loading...</p>;
   if (!car) return <p>Car not found.</p>;
 
-  const today = new Date().getTime();
+  const now = new Date().getTime();
+
   const isUnavailableToday = car.status === "unavailable" ||
     car.rentals?.some(r => {
-      const [start, end] = r.period.split(" - ").map(Number);
-      return today >= start && today <= end;
+      const [startStr, endStr] = r.period.split(" - ");
+      const start = Number(startStr);
+      const end = Number(endStr);
+      return now >= start && now <= (end - 1);
     });
 
   return (

@@ -1,10 +1,8 @@
-// src/components/Sidebar.jsx
 import React from "react";
 import { ListGroup } from "react-bootstrap";
 import { listGroupStyle, itemStyle, itemHoverStyle } from "./Sidebar.styles";
 
 function Sidebar({ activeTab, setActiveTab, isAdmin, loadingUser }) {
-  // أثناء تحميل بيانات المستخدم، لا نعرض Sidebar
   if (loadingUser) return null;
 
   return (
