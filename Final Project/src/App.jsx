@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import MainPage from "./pages/main/main";
-import CarDetails from "./pages/car/CarDetails"; // <-- هذا المهم
+import CarDetails from "./pages/car/CarDetails"; 
 
 function App() {
   return (
