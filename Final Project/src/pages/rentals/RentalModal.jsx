@@ -122,19 +122,6 @@ const RentalModal = ({ show, handleClose, car }) => {
               Total Price: ${totalPrice}
             </p>
 
-            {car.rentals?.length > 0 && (
-              <div style={{ marginTop: "10px" }}>
-                <p style={{ fontWeight: "bold" }}>Existing Bookings:</p>
-                <ListGroup>
-                  {car.rentals.map((r, idx) => {
-                    const start = new Date(Number(r.period.split(" - ")[0])).toLocaleDateString();
-                    const end = new Date(Number(r.period.split(" - ")[1])).toLocaleDateString();
-                    return <ListGroup.Item key={idx}>{start} - {end}</ListGroup.Item>;
-                  })}
-                </ListGroup>
-              </div>
-            )}
-
             {overlappingBooking && (
               <p style={{ color: "red", fontWeight: "bold", marginTop: "10px" }}>
                 This car is already booked for selected dates!
