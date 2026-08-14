@@ -27,7 +27,7 @@ A React-based web application for managing events. The application allows users 
 ## Live Demo
 
 
-([View Live Demo](https://exalt-fe-training2025-ago6.vercel.app/)
+[View Live Demo](https://exalt-fe-training2025-ago6.vercel.app/)
 
 ## Deployment
 
