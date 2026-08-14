@@ -4,6 +4,27 @@ A responsive car rental web application built with **React and Vite**. The appli
 
 This project was developed as a **Final Front-End Project** during the Exalt Front-End Training Program.
 
+## 🔑 Demo Accounts
+
+You can use the following demo accounts to explore the application.
+
+### 🌐 Live Demo
+
+[Open Car Rental Web Application](https://car-rental-wine-eta.vercel.app/)
+
+### 👤 Normal User
+
+- Email: `normal@normal.com`
+- Password: `normal123`
+
+### 🔐 Admin User
+
+- Email: `admin@admin.com`
+- Password: `admin123`
+
+> The Normal User can browse cars, rent vehicles, and view rental history.
+> The Admin User has additional permissions to manage the car inventory, including adding, updating, and deleting cars.
+
 ## ✨ Features
 
 ### 👤 User Features
