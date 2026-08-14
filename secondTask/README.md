@@ -3,9 +3,7 @@
 A simple web interface for creating, editing, and managing events. Users can add event details such as the event name, description, and date and time.
 
 ## Live Demo
-```
-https://exalt-fe-training2025-l4b9.vercel.app/
-```
+(https://exalt-fe-training2025-l4b9.vercel.app/)
 
 ## Features
 
