@@ -1,12 +1,113 @@
-# React + Vite
+# 🚗 Car Rental Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive car rental web application built with **React and Vite**. The application allows users to browse available cars, view car details, rent vehicles, and review their rental history. It also includes an admin interface for managing the car inventory.
 
-Currently, two official plugins are available:
+This project was developed as a **Final Front-End Project** during the Exalt Front-End Training Program.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+### 👤 User Features
+- User authentication with email and password
+- Browse available cars
+- View detailed information about individual cars
+- Rent available vehicles
+- View personal rental history
+- Responsive and user-friendly interface
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🔐 Admin Features
+- Admin authentication
+- View the complete car inventory
+- Add new cars
+- Add car images
+- Update existing car information
+- Delete cars
+- View rental information
+
+### ⚙️ Application Features
+- Dynamic routing
+- Firebase Authentication
+- Firebase Firestore database
+- Firebase Storage
+- CRUD operations for cars
+- Loading and error states
+- Reusable React components
+- End-to-end testing with Cypress
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React
+- Vite
+- React Router
+- React Bootstrap
+- Bootstrap
+- Framer Motion
+
+### Backend / Data
+- Firebase Authentication
+- Firebase Firestore
+- Firebase Storage
+
+### State & Data Management
+- TanStack React Query
+- Zustand
+
+### Testing & Development
+- Cypress
+- ESLint
+- Vite
+
+## 📁 Project Structure
+
+```text
+Final Project/
+├── cypress/
+│   ├── e2e/
+│   ├── fixtures/
+│   └── support/
+│
+├── public/
+│   └── carlogo.jpg
+│
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   │   ├── firebase.js
+│   │   └── carService.js
+│   ├── App.jsx
+│   ├── main.jsx
+│   ├── App.css
+│   └── index.css
+│
+├── package.json
+├── vite.config.js
+└── cypress.config.js
+
+## 🚀 Getting Started
+1. Clone the repository
+git clone https://github.com/samaabosair/ExaltFETraining2025.git
+
+2. Navigate to the project
+cd ExaltFETraining2025
+cd "Final Project"
+
+3. Install dependencies
+npm install
+
+The application will be available at the local URL provided by Vite in the terminal.
+
+## 📜 Available Scripts
+
+Start development server
+npm run dev
+
+Build for production
+npm run build
+
+Preview production build
+npm run preview
+
+Run ESLint
+npm run lint
