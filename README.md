@@ -20,7 +20,7 @@ A web application for browsing and managing car rentals.
 - Password: `admin123`
 
 > The Normal User can browse cars, rent vehicles, and view rental history.
-> The 
+> The Admin User has additional permissions to manage the car inventory, including adding, updating, and deleting cars.
 
 [View Project README](./Final%20Project/README.md)
 
