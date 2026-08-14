@@ -9,6 +9,19 @@ This repository contains the projects and tasks completed during my Front-End De
 
 A web application for browsing and managing car rentals.
 
+### 👤 Normal User
+
+- Email: `normal@normal.com`
+- Password: `normal123`
+
+### 🔐 Admin User
+
+- Email: `admin@admin.com`
+- Password: `admin123`
+
+> The Normal User can browse cars, rent vehicles, and view rental history.
+> The 
+
 [View Project README](./Final%20Project/README.md)
 
 [Live Demo](https://car-rental-wine-eta.vercel.app/)
