@@ -1,12 +1,78 @@
-# React + Vite
+# Event Management Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based web application for managing events. The application allows users to create new events, view existing events, and edit event information through a simple and user-friendly interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Create new events
+- View event details
+- Edit existing events
+- Navigate between different pages
+- Reusable event form component
+- Client-side event data management
+- Responsive and organized user interface
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React.js — Building the user interface and reusable components
+- Vite — Development server and build tool
+- JavaScript (ES6+) — Application logic and functionality
+- JSX — Writing React components
+- React Router DOM — Client-side routing and navigation
+- CSS3 — Styling and layout
+- ESLint — Code quality and linting
+- npm — Package and dependency management
+- Vercel — Deployment and hosting
+
+## Live Demo
+
+
+([View Live Demo](https://exalt-fe-training2025-ago6.vercel.app/)
+
+## Deployment
+
+The application is deployed and hosted on Vercel.
+
+## Data Management
+
+The application manages event data through the `eventService.js` service, which handles operations such as adding, retrieving, and updating events.)
+
+Deployment
+
+The application is deployed and hosted on Vercel.
+
+Data Management
+
+The application manages event data through the eventService.js service, which handles operations such as adding, retrieving, and updating events.
+
+## Project Structure
+
+```text
+Event-Management/
+├── public/
+│   └── vite.svg
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   └── EventForm
+│   ├── pages/
+│   │   ├── CreatEvent.jsx
+│   │   └── EventPage.jsx
+│   ├── services/
+│   │   └── eventService.js
+│   ├── style/
+│   │   ├── headerStyle.css
+│   │   └── sidebar.css
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── eslint.config.js
+├── index.html
+├── package.json
+├── package-lock.json
+└── vite.config.js
+```
+## Author
+
+Sama Abu Ser
