@@ -9,7 +9,7 @@ This repository contains the projects and tasks completed during my Front-End De
 
 A web application for browsing and managing car rentals.
 
-[View Project README](./Car-Rental/README.md)
+[View Project README](./Final Project/README.md)
 
 [Live Demo](https://car-rental-wine-eta.vercel.app/)
 
@@ -19,7 +19,7 @@ A web application for browsing and managing car rentals.
 
 An event management interface for creating, editing, viewing, and managing events, developed using vanilla HTML, CSS, and JavaScript.
 
-[View Task README](./Task2/README.md)
+[View Task README](./secondTask/README.md)
 
 [Live Demo](https://exalt-fe-training2025-l4b9.vercel.app/)
 
@@ -31,7 +31,7 @@ The same Event Management task rebuilt using React to practice component-based d
 
 **Technologies:** React.js, Vite, JavaScript (JSX), React Router, CSS
 
-[View Task README](./Task3/README.md)
+[View Task README](./thirdTask/README.md)
 
 [Live Demo](https://exalt-fe-training2025-ago6.vercel.app/)
 
@@ -40,7 +40,7 @@ The same Event Management task rebuilt using React to practice component-based d
 
 A simple web interface for creating and managing cards.
 
-[View Task README](./Task1/README.md)
+[View Task README](./firstTask/README.md)
 
 [Live Demo](https://exalt-fe-training2025.vercel.app/)
 
