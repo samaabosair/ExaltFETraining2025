@@ -87,29 +87,78 @@ Final Project/
 
 ```
 
-#### 🚀 Getting Started
-## Clone the repository
+## 🚀 Getting Started
+- Clone the repository
 ```git clone https://github.com/samaabosair/ExaltFETraining2025.git```
 
-## Navigate to the project
-cd ExaltFETraining2025
-cd "Final Project"
+### Navigate to the project
+- cd ExaltFETraining2025
+- cd "Final Project"
 
-## Install dependencies
+### Install dependencies
 ``` npm install```
 
 The application will be available at the local URL provided by Vite in the terminal.
 
-### 📜 Available Scripts
+## 📜 Available Scripts
 
-## Start development server
+### Start development server
 ``` npm run dev```
 
-## Build for production
+### Build for production
 ``` npm run build```
 
-## Preview production build
+### Preview production build
 ``` npm run preview```
 
-## Run ESLint
+### Run ESLint
 ``` npm run lint```
+
+## 🧪 Testing
+#### The project uses Cypress for end-to-end testing.
+- Run Cypress in interactive mod
+```npx cypress open```
+-Run Cypress tests in headless mode:
+```npx cypress run```
+
+## 🔥 Firebase
+
+**Firebase is used as the application's backend service.**
+
+The project uses:
+
+-Firebase Authentication for user authentication
+-Cloud Firestore for storing cars and rental data
+-Firebase Storage for car images
+
+The application supports retrieving, creating, updating, and deleting car records.
+
+## 🎨 UI & User Experience
+The application was designed with a focus on:
+- Simple navigation
+- Clear car information
+- Responsive layouts
+- Easy rental workflow
+- Reusable UI components
+- Separate user and admin experiences
+
+## 💡 Key Learning Outcomes
+
+Through this project, I gained practical experience in:
+
+- 3Building applications with React
+- Creating reusable components
+- Implementing routing
+- Working with Firebase
+- Implementing authentication
+- Working with Firestore
+- Performing CRUD operations
+- Managing asynchronous data
+- Using React Query for data fetching
+- Managing application state
+- Writing end-to-end tests with Cypress
+- Designing responsive user interfaces
+
+## 👩‍💻 Author
+Computer Engineering Graduate
+Front-End Developer
