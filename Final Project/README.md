@@ -85,7 +85,8 @@ Final Project/
 ├── vite.config.js
 └── cypress.config.js
 
-## 🚀 Getting Started
+
+### 🚀 Getting Started
 1. Clone the repository
 git clone https://github.com/samaabosair/ExaltFETraining2025.git
 
@@ -98,7 +99,7 @@ npm install
 
 The application will be available at the local URL provided by Vite in the terminal.
 
-## 📜 Available Scripts
+### 📜 Available Scripts
 
 Start development server
 npm run dev
