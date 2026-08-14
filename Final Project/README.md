@@ -88,28 +88,28 @@ Final Project/
 ```
 
 #### 🚀 Getting Started
-1. Clone the repository
-```git clone https://github.com/samaabosair/ExaltFETraining2025.git
+## Clone the repository
+```git clone https://github.com/samaabosair/ExaltFETraining2025.git```
 
-2. Navigate to the project
+## Navigate to the project
 cd ExaltFETraining2025
 cd "Final Project"
 
-3. Install dependencies
-``` npm install
+## Install dependencies
+``` npm install```
 
 The application will be available at the local URL provided by Vite in the terminal.
 
 ### 📜 Available Scripts
 
-Start development server
-``` npm run dev
+## Start development server
+``` npm run dev```
 
-Build for production
-``` npm run build
+## Build for production
+``` npm run build```
 
-Preview production build
-``` npm run preview
+## Preview production build
+``` npm run preview```
 
-Run ESLint
-``` npm run lint
+## Run ESLint
+``` npm run lint```
