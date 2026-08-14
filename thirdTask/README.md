@@ -75,4 +75,4 @@ Event-Management/
 ```
 ## Author
 
-Sama Abu Ser
+Sama AbuSair
