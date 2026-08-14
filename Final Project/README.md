@@ -85,30 +85,31 @@ Final Project/
 ├── vite.config.js
 └── cypress.config.js
 
+```
 
-### 🚀 Getting Started
+#### 🚀 Getting Started
 1. Clone the repository
-git clone https://github.com/samaabosair/ExaltFETraining2025.git
+```git clone https://github.com/samaabosair/ExaltFETraining2025.git
 
 2. Navigate to the project
 cd ExaltFETraining2025
 cd "Final Project"
 
 3. Install dependencies
-npm install
+``` npm install
 
 The application will be available at the local URL provided by Vite in the terminal.
 
 ### 📜 Available Scripts
 
 Start development server
-npm run dev
+``` npm run dev
 
 Build for production
-npm run build
+``` npm run build
 
 Preview production build
-npm run preview
+``` npm run preview
 
 Run ESLint
-npm run lint
+``` npm run lint
